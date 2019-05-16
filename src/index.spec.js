@@ -16,3 +16,7 @@ test("new Grid of 10,10", () => {
     expect(grid.y).toEqual(10);
 });
 
+test("Get value at x=2, y=3", () => {
+  const grid = new Grid(10, 10);
+  expect(grid.get(2, 3)).toEqual(false);
+});
