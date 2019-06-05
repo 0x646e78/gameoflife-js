@@ -23,4 +23,10 @@ export class Grid {
   get(x, y){
     return this.grid[x][y];
   }
+  set(x, y, state){
+    this.grid[x][y] = state;
+  }
+  toggle(x, y){
+    this.set(x, y, !this.grid[x][y])
+  }
 }
