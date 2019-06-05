@@ -20,3 +20,15 @@ test("Get value at x=2, y=3", () => {
   const grid = new Grid(10, 10);
   expect(grid.get(2, 3)).toEqual(false);
 });
+
+test("Set value at x=2, y=3", () => {
+  const grid = new Grid(10, 10);
+  grid.set(2, 3, true)
+  expect(grid.get(2, 3)).toEqual(true);
+});
+
+test("Toggle value at x=4, y=5", () => {
+  const grid = new Grid(10, 10);
+  grid.toggle(4, 5)
+  expect(grid.get(4, 5)).toEqual(true);
+});
