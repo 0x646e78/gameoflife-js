@@ -8,7 +8,7 @@ function makeGrid(x, y){
   return grid
 }
 
-function assertIsValidValue(n){
+function assertIsValidAxisValue(n){
   if (typeof(n) !== 'number'){
     throw new Error("Expected a number")
   }
@@ -20,9 +20,15 @@ function assertIsValidValue(n){
   }
 }
 
+function assertIsBoolean(b){
+  if (typeof(b) !== 'boolean'){
+    throw new Error("State can only be true or false")
+  }
+}
+
 export class Grid {
   constructor(x, y){
-    [x,y].forEach((e) => assertIsValidValue(e));
+    [x,y].forEach((e) => assertIsValidAxisValue(e));
     this.x = x;
     this.y = y;
     this.grid = makeGrid(x, y);
@@ -31,6 +37,7 @@ export class Grid {
     return this.grid[x][y];
   }
   set(x, y, state){
+    assertIsBoolean(state);
     this.grid[x][y] = state;
   }
   toggle(x, y){

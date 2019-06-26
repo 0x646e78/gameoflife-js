@@ -19,8 +19,7 @@ test("new Grid of non-positive number values should fail gracefully", () => {
     expect(() => {new Grid(-Infinity, 10)}).toThrow();
 });
 
-test("Inifinity in an axis", () => {
-//    const grid = new Grid(Infinity, 10);
+test("Inifinity in an axis should fail gracefully", () => {
     expect(() => {new Grid(Infinity, 10)}).toThrow();
     expect(() => {new Grid(10, Infinity)}).toThrow();
 });
@@ -34,6 +33,12 @@ test("new Grid of 10,10", () => {
 test("Get value at x=2, y=3", () => {
   const grid = new Grid(10, 10);
   expect(grid.get(2, 3)).toEqual(false);
+});
+
+test("Setting non-boolean values as state should fail gracefully", () => {
+  const grid = new Grid(10, 10);
+  expect(() => {grid.set(6, 6, 6)}).toThrow();
+  expect(() => {grid.set(6, 6, "on")}).toThrow();
 });
 
 test("Set value at x=2, y=3", () => {
