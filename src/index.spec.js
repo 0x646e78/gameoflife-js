@@ -43,12 +43,29 @@ test("Setting non-boolean values as state should fail gracefully", () => {
 
 test("Set value at x=2, y=3", () => {
   const grid = new Grid(10, 10);
-  grid.set(2, 3, true)
+  grid.set(2, 3, true);
   expect(grid.get(2, 3)).toEqual(true);
 });
 
 test("Toggle value at x=4, y=5", () => {
   const grid = new Grid(10, 10);
-  grid.toggle(4, 5)
+  grid.toggle(4, 5);
   expect(grid.get(4, 5)).toEqual(true);
+});
+
+test("Importing JSON represenation of grid state", () => {
+  const json = [
+    [ false, false, false, false, false ],
+    [ false, false, true, false, false ],
+    [ false, false, false, true, false ],
+    [ false, true, true, true, false ],
+    [ false, false, false, false, false ]
+  ];
+  const grid = new Grid(5, 5);
+  json.forEach((row, x) => {
+    row.forEach((cell, y) => {
+      grid.set(x, y, cell)
+    });
+  });
+  expect(grid.dump()).toEqual(JSON.stringify(json));
 });

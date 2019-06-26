@@ -26,6 +26,10 @@ function assertIsBoolean(b){
   }
 }
 
+export function importGridState(j){
+
+}
+
 export class Grid {
   constructor(x, y){
     [x,y].forEach((e) => assertIsValidAxisValue(e));
@@ -44,6 +48,6 @@ export class Grid {
     this.set(x, y, !this.grid[x][y]);
   }
   dump(){
-    console.log(JSON.stringify(this.grid));
+    return JSON.stringify(this.grid);
   }
 }
