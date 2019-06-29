@@ -3,6 +3,12 @@
 [![CircleCI](https://circleci.com/gh/0x646e78/gameoflife-js/tree/master.svg?style=svg)](https://circleci.com/gh/0x646e78/gameoflife-js/tree/master)
 [![Known Vulnerabilities](https://snyk.io/test/github/0x646e78/gameoflife-js/badge.svg?style=plastic)](https://snyk.io/test/github/0x646e78/gameoflife-js) 
 
+## My upcoming Q's.
+
+- Best way to add a new package (local npm install and then save line to packages?)
+- Package management, upgrades etc.
+- Best ways to run from cli (via babel as a module I assume)
+
 ## The Rules of Life
 
 1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
