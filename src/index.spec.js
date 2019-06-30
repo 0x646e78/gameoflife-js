@@ -1,7 +1,15 @@
 import { sumOfTwoInteger } from "./index"
 import { diffOfTwoInteger } from "./index"
-import { initGridState } from "./index"
+import { newGridFromState } from "./index"
 import { Grid } from "./index"
+
+const initState = [
+  [ false, false, false, false, false ],
+  [ false, false, true, false, false ],
+  [ false, false, false, true, false ],
+  [ false, true, true, true, false ],
+  [ false, false, false, false, false ]
+];
 
 test("sum of 1 and 4 should return 5", () => {
     expect(sumOfTwoInteger(1, 4)).toEqual(5);
@@ -31,9 +39,9 @@ test("new Grid of 10,10", () => {
     expect(grid.y).toEqual(10);
 });
 
-test("Get value at x=2, y=3", () => {
-  const grid = new Grid(10, 10);
-  expect(grid.get(2, 3)).toEqual(false);
+test("Get value at x=1, y=2", () => {
+  const grid = newGridFromState(initState);
+  expect(grid.get(1, 2)).toEqual(true);
 });
 
 test("Setting non-boolean values as state should fail gracefully", () => {
@@ -55,13 +63,12 @@ test("Toggle value at x=4, y=5", () => {
 });
 
 test("Importing JSON represenation of grid state", () => {
-  const json = [
-    [ false, false, false, false, false ],
-    [ false, false, true, false, false ],
-    [ false, false, false, true, false ],
-    [ false, true, true, true, false ],
-    [ false, false, false, false, false ]
-  ];
-  const grid = initGridState(json);
-  expect(grid.dump()).toEqual(JSON.stringify(json));
+  const grid = newGridFromState(initState);
+  expect(grid.dump()).toEqual(JSON.stringify(initState));
+});
+
+test("Get neightbour states for cell at x=2, y=2", () => {
+  const neighbours = [ true, false, true ];
+  const grid = newGridFromState(initState);
+  expect(JSON.stringify(grid.neighbourState(2, 2))).toEqual(JSON.stringify({"live":5,"dead":3}));
 });

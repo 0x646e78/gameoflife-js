@@ -26,11 +26,11 @@ function assertIsBoolean(b){
   }
 }
 
-export function initGridState(state){
+export function newGridFromState(state){
   const grid = new Grid(state.length, state[0].length);
   state.forEach((row, x) => {
-    row.forEach((cell, y) => {
-      grid.set(x, y, cell)
+    row.forEach((cellState, y) => {
+      grid.set(x, y, cellState)
     });
   });
   return grid;
@@ -52,6 +52,21 @@ export class Grid {
   }
   toggle(x, y){
     this.set(x, y, !this.grid[x][y]);
+  }
+  neighbourState(x, y){
+    const n = { "live": 0, "dead": 0 };
+    [(x - 1), x, (x + 1)].forEach((cellx, i) => {
+      [(y -1), y, (y + 1)].forEach((celly, i) => {
+        if (! (cellx === x && celly === y)) {
+          if (this.get(cellx, celly)) {
+            n['live'] += 1
+          } else {
+            n['dead'] += 1
+          };
+        };
+      });
+    });
+    return n;
   }
   dump(){
     return JSON.stringify(this.grid);
