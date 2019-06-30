@@ -67,8 +67,13 @@ test("Importing JSON represenation of grid state", () => {
   expect(grid.dump()).toEqual(JSON.stringify(initState));
 });
 
-test("Get neightbour states for cell at x=2, y=2", () => {
-  const neighbours = [ true, false, true ];
+test("Get neighbour states", () => {
   const grid = newGridFromState(initState);
-  expect(JSON.stringify(grid.neighbourState(2, 2))).toEqual(JSON.stringify({"live":5,"dead":3}));
+  expect(JSON.stringify(grid.neighbourStates(2, 2))).toEqual(JSON.stringify({"live":5,"dead":3}));
+  expect(JSON.stringify(grid.neighbourStates(0, 3))).toEqual(JSON.stringify({"live":1,"dead":4}));
+  expect(JSON.stringify(grid.neighbourStates(3, 0))).toEqual(JSON.stringify({"live":1,"dead":4}));
+  expect(JSON.stringify(grid.neighbourStates(4, 3))).toEqual(JSON.stringify({"live":2,"dead":3}));
+  expect(JSON.stringify(grid.neighbourStates(2, 4))).toEqual(JSON.stringify({"live":2,"dead":3}));
+  expect(JSON.stringify(grid.neighbourStates(0, 0))).toEqual(JSON.stringify({"live":0,"dead":3}));
+  expect(JSON.stringify(grid.neighbourStates(4, 4))).toEqual(JSON.stringify({"live":1,"dead":2}));
 });

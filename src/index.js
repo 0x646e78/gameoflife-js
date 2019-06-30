@@ -53,18 +53,20 @@ export class Grid {
   toggle(x, y){
     this.set(x, y, !this.grid[x][y]);
   }
-  neighbourState(x, y){
+  neighbourStates(x, y){
     const n = { "live": 0, "dead": 0 };
     [(x - 1), x, (x + 1)].forEach((cellx, i) => {
-      [(y -1), y, (y + 1)].forEach((celly, i) => {
-        if (! (cellx === x && celly === y)) {
-          if (this.get(cellx, celly)) {
-            n['live'] += 1
-          } else {
-            n['dead'] += 1
+      if ((cellx > -1) && (cellx < this.grid.length)) {
+        [(y -1), y, (y + 1)].forEach((celly, i) => {
+          if (((celly > -1) && (celly < this.grid[cellx].length)) && (! (cellx === x && celly === y))) {
+            if (this.get(cellx, celly)) {
+              n['live'] += 1
+            } else {
+              n['dead'] += 1
+            };
           };
-        };
-      });
+        });
+      };
     });
     return n;
   }
