@@ -26,8 +26,14 @@ function assertIsBoolean(b){
   }
 }
 
-export function importGridState(j){
-
+export function initGridState(state){
+  const grid = new Grid(state.length, state[0].length);
+  state.forEach((row, x) => {
+    row.forEach((cell, y) => {
+      grid.set(x, y, cell)
+    });
+  });
+  return grid;
 }
 
 export class Grid {

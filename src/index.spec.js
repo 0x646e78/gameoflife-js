@@ -1,5 +1,6 @@
 import { sumOfTwoInteger } from "./index"
 import { diffOfTwoInteger } from "./index"
+import { initGridState } from "./index"
 import { Grid } from "./index"
 
 test("sum of 1 and 4 should return 5", () => {
@@ -61,11 +62,6 @@ test("Importing JSON represenation of grid state", () => {
     [ false, true, true, true, false ],
     [ false, false, false, false, false ]
   ];
-  const grid = new Grid(5, 5);
-  json.forEach((row, x) => {
-    row.forEach((cell, y) => {
-      grid.set(x, y, cell)
-    });
-  });
+  const grid = initGridState(json);
   expect(grid.dump()).toEqual(JSON.stringify(json));
 });
