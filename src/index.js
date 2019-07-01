@@ -26,6 +26,14 @@ function assertIsBoolean(b){
   }
 }
 
+function between(min, max, value) {
+      if ((min < value) && (value < max)) {
+        return true
+      } else {
+        return false
+      }
+}
+
 export function newGridFromState(state){
   const grid = new Grid(state.length, state[0].length);
   state.forEach((row, x) => {
@@ -38,7 +46,7 @@ export function newGridFromState(state){
 
 export class Grid {
   constructor(x, y){
-    [x,y].forEach((e) => assertIsValidAxisValue(e));
+    [x,y].forEach(assertIsValidAxisValue);
     this.x = x;
     this.y = y;
     this.grid = makeGrid(x, y);
@@ -55,10 +63,10 @@ export class Grid {
   }
   neighbourStates(x, y){
     const n = { "live": 0, "dead": 0 };
-    [(x - 1), x, (x + 1)].forEach((cellx, i) => {
-      if ((cellx > -1) && (cellx < this.grid.length)) {
-        [(y -1), y, (y + 1)].forEach((celly, i) => {
-          if (((celly > -1) && (celly < this.grid[cellx].length)) && (! (cellx === x && celly === y))) {
+    [(x - 1), x, (x + 1)].forEach((cellx) => {
+      if (between(-1, this.grid.length, cellx)) {
+        [(y -1), y, (y + 1)].forEach((celly) => {
+          if (between(-1, this.grid[cellx].length, celly) && (! (cellx === x && celly === y))) {
             if (this.get(cellx, celly)) {
               n['live'] += 1
             } else {
