@@ -28,9 +28,9 @@ function assertIsBoolean(b){
 
 function between(min, max, value) {
       if ((min < value) && (value < max)) {
-        return true
+        return true;
       } else {
-        return false
+        return false;
       }
 }
 
