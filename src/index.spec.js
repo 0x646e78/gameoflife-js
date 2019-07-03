@@ -1,7 +1,4 @@
-import { sumOfTwoInteger } from "./index"
-import { diffOfTwoInteger } from "./index"
-import { newGridFromState } from "./index"
-import { Grid } from "./index"
+const { Grid, newGridFromState } = require('./index');
 
 const initState = [
   [ false, false, false, false, false ],
@@ -10,14 +7,6 @@ const initState = [
   [ false, true, true, true, false ],
   [ false, false, false, false, false ]
 ];
-
-test("sum of 1 and 4 should return 5", () => {
-    expect(sumOfTwoInteger(1, 4)).toEqual(5);
-});
-
-test("diff of 5 and 4 should return 1", () => {
-    expect(diffOfTwoInteger(5, 4)).toEqual(1);
-});
 
 test("new Grid of non-positive number values should fail gracefully", () => {
     expect(() => {new Grid(-10, 10)}).toThrow();

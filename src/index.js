@@ -1,6 +1,3 @@
-export const sumOfTwoInteger = (x, y) => x + y;
-export const diffOfTwoInteger = (x, y) => x - y;
-
 function makeGrid(x, y){
   const grid = [...Array(x)].map(() =>
     ([...Array(y)].map(() => false))
@@ -34,7 +31,7 @@ function between(min, max, value) {
       }
 }
 
-export function newGridFromState(state){
+function newGridFromState(state){
   const grid = new Grid(state.length, state[0].length);
   state.forEach((row, x) => {
     row.forEach((cellState, y) => {
@@ -44,7 +41,7 @@ export function newGridFromState(state){
   return grid;
 }
 
-export class Grid {
+class Grid {
   constructor(x, y){
     [x,y].forEach(assertIsValidAxisValue);
     this.x = x;
@@ -82,3 +79,8 @@ export class Grid {
     return JSON.stringify(this.grid);
   }
 }
+
+module.exports = {
+  newGridFromState,
+  Grid,
+};
