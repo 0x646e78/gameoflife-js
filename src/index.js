@@ -24,11 +24,27 @@ function assertIsBoolean(b){
 }
 
 function between(min, max, value) {
-      if ((min < value) && (value < max)) {
-        return true;
-      } else {
-        return false;
-      }
+      return (min < value) && (value < max);
+}
+
+function decideFate(currState, neighbourStates) {
+    /*
+    1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
+    2. Any live cell with two or three live neighbours lives on to the next generation.
+    3. Any live cell with more than three live neighbours dies, as if by overpopulation.
+    4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.  
+    */
+  if (currState) {
+    if (neighbourStates.live < 2) {
+      return false
+    } else if (neighbourStates.live > 3) {
+      return false
+    } else {
+      return true
+    }
+  } else {
+    return (neighbourStates.live === 3);
+  }
 }
 
 function newGridFromState(state){
@@ -57,6 +73,13 @@ class Grid {
   }
   toggle(x, y){
     this.set(x, y, !this.grid[x][y]);
+  }
+  next(){
+    this.grid = this.grid.map((row, indexX) => {
+      return row.map((cell, indexY) => {
+        return decideFate(cell, this.neighbourStates(indexX, indexY));
+      });
+    });
   }
   neighbourStates(x, y){
     const n = { "live": 0, "dead": 0 };

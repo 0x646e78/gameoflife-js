@@ -8,6 +8,14 @@ const initState = [
   [ false, false, false, false, false ]
 ];
 
+const nextState = [
+  [ false, false, false, false, false ],
+  [ false, false, false, false, false ],
+  [ false, true, false, true, false ],
+  [ false, false, true, true, false ],
+  [ false, false, true, false, false ]
+];
+
 test("new Grid of non-positive number values should fail gracefully", () => {
     expect(() => {new Grid(-10, 10)}).toThrow();
     expect(() => {new Grid(10, -10)}).toThrow();
