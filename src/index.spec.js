@@ -74,3 +74,9 @@ test("Get neighbour states", () => {
   expect(JSON.stringify(grid.neighbourStates(0, 0))).toEqual(JSON.stringify({"live":0,"dead":3}));
   expect(JSON.stringify(grid.neighbourStates(4, 4))).toEqual(JSON.stringify({"live":1,"dead":2}));
 });
+
+test("grid.next should return a grid of next state", () => {
+  const grid = newGridFromState(initState);
+  grid.next()
+  expect(grid.dump()).toEqual(JSON.stringify(nextState));
+});
