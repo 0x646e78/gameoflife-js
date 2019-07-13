@@ -1,25 +1,25 @@
 const { Grid } = require('./index');
-const term = require( 'terminal-kit' );
+const term = require('terminal-kit');
 
-function startX(x, border){
+function startX(x, border) {
   return (((term.realTerminal.width - (border * 2) - x) / 2) + border)
 }
 
-function startY(y, border){
+function startY(y, border) {
   return (((term.realTerminal.height - (border * 2) - y) / 2) + border)
 }
 
-function assertIsWholeNumber(n){
-  if (! Number.isInteger(n)){
+function assertIsWholeNumber(n) {
+  if (! Number.isInteger(n)) {
     throw new Error("Border should be a whole number")
   }
 }
 
-function assertFitsTerm(x, y, border){
-  if (term.realTerminal.width - (border * 2) < x){
+function assertFitsTerm(x, y, border) {
+  if (term.realTerminal.width - (border * 2) < x) {
     throw new Error("Edge dimensions are larger than the terminal size");
   }
-  if (term.realTerminal.height - (border * 2) < y){
+  if (term.realTerminal.height - (border * 2) < y) {
     throw new Error("Edge dimensions are larger than the terminal size");
   }
 }
@@ -35,7 +35,7 @@ class TerminalGrid {
       y = term.realTerminal.height - (border * 2);
     }
     assertFitsTerm(x, y, border);
-    if (center){
+    if (center) {
       this.startx = startX(x, border);
       this.starty = startY(y, border);
     } else {
