@@ -25,7 +25,7 @@ function assertFitsTerm(x, y, border) {
 }
 
 class TerminalGrid {
-  constructor({x=5, y=5, border=1, center=false, max=false}) {
+  constructor({x=5, y=5, border=0, center=false, max=false}) {
     assertIsWholeNumber(border);
     this.border = border;
     this.live = String.fromCharCode(9617);
@@ -67,5 +67,5 @@ class TerminalGrid {
   }
 }
 
-const canvas = new TerminalGrid({x:30, y:30, border:0, center:true, max:false});
+const canvas = new TerminalGrid({x:30, y:30, border:5, center:true, max:true});
 canvas.run(1000);
