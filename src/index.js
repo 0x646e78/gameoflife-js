@@ -102,10 +102,10 @@ class Grid {
               n['live'] += 1
             } else {
               n['dead'] += 1
-            };
-          };
+            }
+          }
         });
-      };
+      }
     });
     return n;
   }

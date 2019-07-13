@@ -4,6 +4,7 @@
   "description": "Starter project",
   "main": "src/index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint src/index.js",
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
@@ -11,6 +12,7 @@
   "license": "MIT",
   "devDependencies": {
     "babel-jest": "*",
+    "eslint": "^6.0.1",
     "jest": "*",
     "jest-cli": "*"
   },
