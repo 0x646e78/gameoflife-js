@@ -27,6 +27,10 @@ function between(min, max, value) {
   return (min < value) && (value < max);
 }
 
+function decideRandom() {
+  return Math.round(Math.random() * 100) > 50
+}
+
 function decideFate(currState, neighbourStates) {
   /*
   1. Any live cell with fewer than two live neighbours dies, as if by underpopulation.
@@ -78,6 +82,13 @@ class Grid {
     this.grid = this.grid.map((row, indexX) => {
       return row.map((cell, indexY) => {
         return decideFate(cell, this.neighbourStates(indexX, indexY));
+      });
+    });
+  }
+  randomise(){
+    this.grid = this.grid.map((row) => {
+      return row.map(() => {
+        return decideRandom();
       });
     });
   }
