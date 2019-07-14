@@ -2,11 +2,11 @@ const { Grid } = require('./index');
 const term = require('terminal-kit');
 
 function startX(x, border) {
-  return (((term.realTerminal.width - (border * 2) - x) / 2) + border)
+  return (((term.realTerminal.width - (border * 2) - x) / 2) + border + 1)
 }
 
 function startY(y, border) {
-  return (((term.realTerminal.height - (border * 2) - y) / 2) + border)
+  return (((term.realTerminal.height - (border * 2) - y) / 2) + border + 1)
 }
 
 function assertIsWholeNumber(n) {
@@ -54,8 +54,8 @@ class TerminalGrid {
   render() {
     this.grid.grid.forEach((row, x) => {
       row.forEach((cell, y) => {
-        this.term.moveTo((this.startx+x), (this.starty+y), (cell ? this.live : this.dead));
         this.term.hideCursor();
+        this.term.moveTo((this.startx+x), (this.starty+y), (cell ? this.live : this.dead));
       });
     });
   }
@@ -67,5 +67,11 @@ class TerminalGrid {
   }
 }
 
-const canvas = new TerminalGrid({x:30, y:30, border:5, center:true, max:true});
-canvas.run(1000);
+function run() {
+  const canvas = new TerminalGrid({x:50, y:40, border:5, center:true, max:false});
+  canvas.run(1000);
+}
+
+if (typeof module != 'undefined' && !module.parent) {
+  run();
+}
