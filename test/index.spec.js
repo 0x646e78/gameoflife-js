@@ -1,4 +1,4 @@
-const { Grid, newGridFromState } = require('./index');
+const { Grid, newGridFromState } = require('../src/index');
 
 const initState = [
   [ false, false, false, false, false ],
