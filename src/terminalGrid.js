@@ -15,18 +15,30 @@ function assertIsWholeNumber(n) {
   }
 }
 
-function assertFitsTerm(x, y, border) {
-  if (term.realTerminal.width - (border * 2) < x) {
-    throw new Error("Edge dimensions are larger than the terminal size");
+function assertBorderFits(x, y, border) {
+  const b =  border * 2 
+  const msg = "Border size i" + border + " is larger than X or Y";
+  if (b > x || b > y) {
+    throw new Error(msg);
   }
-  if (term.realTerminal.height - (border * 2) < y) {
-    throw new Error("Edge dimensions are larger than the terminal size");
+}
+
+function assertFitsTerm(x, y, border) {
+  const w = term.realTerminal.width - (border * 2);
+  const h = term.realTerminal.height - (border * 2);
+  const msg = "Edge dimensions will not fit the terminal size";
+  if (w < 0 || w < x) {
+    throw new Error(msg);
+  }
+  if (h < 0 || h < y) {
+    throw new Error(msg);
   }
 }
 
 class TerminalGrid {
   constructor({x=5, y=5, border=0, center=false, max=false}) {
     assertIsWholeNumber(border);
+    assertBorderFits(x, y, border);
     this.border = border;
     this.live = String.fromCharCode(9617);
     this.dead = " ";
