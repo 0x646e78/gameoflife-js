@@ -2,21 +2,21 @@ const { Grid } = require('./index');
 const term = require('terminal-kit');
 
 function startX(x, border) {
-  return (((term.realTerminal.width - (border * 2) - x) / 2) + border + 1)
+  return (((term.realTerminal.width - (border * 2) - x) / 2) + border + 1);
 }
 
 function startY(y, border) {
-  return (((term.realTerminal.height - (border * 2) - y) / 2) + border + 1)
+  return (((term.realTerminal.height - (border * 2) - y) / 2) + border + 1);
 }
 
 function assertIsWholeNumber(n) {
   if (! Number.isInteger(n)) {
-    throw new Error("Border should be a whole number")
+    throw new Error("Border should be a whole number");
   }
 }
 
 function assertBorderFits(x, y, border) {
-  const b =  border * 2 
+  const b =  border * 2; 
   const msg = "Border size i" + border + " is larger than X or Y";
   if (b > x || b > y) {
     throw new Error(msg);
@@ -80,7 +80,7 @@ class TerminalGrid {
 }
 
 function run() {
-  const canvas = new TerminalGrid({x:50, y:40, border:5, center:true, max:false});
+  const canvas = new TerminalGrid({x:10, y:10, border:5, center:true, max:true});
   canvas.run(1000);
 }
 

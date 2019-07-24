@@ -2,24 +2,24 @@ function makeGrid(x, y){
   const grid = [...Array(x)].map(() =>
     ([...Array(y)].map(() => false))
   );
-  return grid
+  return grid;
 }
 
 function assertIsValidAxisValue(n){
   if (typeof(n) !== 'number'){
-    throw new Error("Expected a number")
+    throw new Error("Expected a number");
   }
   if (n < 1){
-    throw new Error("Expected a positive number")
+    throw new Error("Expected a positive number");
   }
   if (n === Infinity){
-    throw new Error("Infinity currently not supported")
+    throw new Error("Infinity currently not supported");
   }
 }
 
 function assertIsBoolean(b){
   if (typeof(b) !== 'boolean'){
-    throw new Error("State can only be true or false")
+    throw new Error("State can only be true or false");
   }
 }
 
@@ -28,7 +28,7 @@ function between(min, max, value) {
 }
 
 function decideRandom() {
-  return Math.round(Math.random() * 100) > 50
+  return Math.round(Math.random() * 100) > 70;
 }
 
 function decideFate(currState, neighbourStates) {
@@ -40,11 +40,11 @@ function decideFate(currState, neighbourStates) {
   */
   if (currState) {
     if (neighbourStates.live < 2) {
-      return false
+      return false;
     } else if (neighbourStates.live > 3) {
-      return false
+      return false;
     } else {
-      return true
+      return true;
     }
   } else {
     return (neighbourStates.live === 3);
@@ -55,7 +55,7 @@ function newGridFromState(state){
   const grid = new Grid(state.length, state[0].length);
   state.forEach((row, x) => {
     row.forEach((cellState, y) => {
-      grid.set(x, y, cellState)
+      grid.set(x, y, cellState);
     });
   });
   return grid;
@@ -99,9 +99,9 @@ class Grid {
         [(y -1), y, (y + 1)].forEach((celly) => {
           if (between(-1, this.grid[cellx].length, celly) && (! (cellx === x && celly === y))) {
             if (this.get(cellx, celly)) {
-              n['live'] += 1
+              n['live'] += 1;
             } else {
-              n['dead'] += 1
+              n['dead'] += 1;
             }
           }
         });
