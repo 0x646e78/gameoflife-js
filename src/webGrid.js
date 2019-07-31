@@ -1,17 +1,22 @@
 const { Grid } = require('./index');
 
+function rect(ctx, n, x) {
+  console.log('n', n);
+  const fillcolor = "#" + ((n + 1) * 20) + "10" + ((n + 1) * 10);
+  console.log('fillcolor', fillcolor);
+  ctx.fillStyle = fillcolor;
+  ctx.fillRect(x, 10, 10, 10);
+}
+
 function run() {
   const canvas = document.getElementById('grid');
   console.log('canvas', canvas);
   if (canvas.getContext) {
     const ctx = canvas.getContext('2d');
 
-//    ctx.fillRect(x, y, width, height);
-    ctx.fillStyle = 'rgb(200, 0, 0)';
-    ctx.fillRect(10, 10, 50, 50);
-
-    ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
-    ctx.fillRect(30, 30, 50, 50);
+    [10, 20, 30, 40].forEach((x, n) => {
+      rect(ctx, n, x);
+    });
   }
 }
 
