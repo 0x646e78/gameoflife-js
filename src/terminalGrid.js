@@ -1,5 +1,5 @@
 const { Grid } = require('./index');
-const { startX, startY, assertIsWholeNumber } = require('./grid-helpers');
+const { startCoord, assertIsWholeNumber } = require('./grid-helpers');
 const term = require('terminal-kit');
 
 function assertBorderFits(x, y, border) {
@@ -35,8 +35,8 @@ class TerminalGrid {
     }
     assertFitsTerm(x, y, border);
     if (center) {
-      this.startx = startX(x, border);
-      this.starty = startY(y, border);
+      this.startx = startCoord(term.realTerminal.width, x, border);
+      this.starty = startCoord(term.realTerminal.height, y, border);
     } else {
       this.startx = border + 1;
       this.starty = border + 1;

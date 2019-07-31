@@ -1,11 +1,5 @@
-const term = require('terminal-kit');
-
-function startX(x, border) {
-  return (((term.realTerminal.width - (border * 2) - x) / 2) + border + 1);
-}
-
-function startY(y, border) {
-  return (((term.realTerminal.height - (border * 2) - y) / 2) + border + 1);
+function startCoord(maxwidth, dimension, border) {
+  return (((maxwidth - (border * 2) - dimension) / 2) + border + 1);
 }
 
 function assertIsBoolean(b){
@@ -22,8 +16,7 @@ function assertIsWholeNumber(n) {
 
 
 module.exports = {
-  startX,
-  startY,
+  startCoord,
   assertIsBoolean,
   assertIsWholeNumber,
 };

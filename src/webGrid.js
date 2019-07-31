@@ -4,8 +4,9 @@ function run() {
   const canvas = document.getElementById('grid');
   console.log('canvas', canvas);
   if (canvas.getContext) {
-    var ctx = canvas.getContext('2d');
+    const ctx = canvas.getContext('2d');
 
+//    ctx.fillRect(x, y, width, height);
     ctx.fillStyle = 'rgb(200, 0, 0)';
     ctx.fillRect(10, 10, 50, 50);
 
