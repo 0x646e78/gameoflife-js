@@ -6,7 +6,7 @@
   "scripts": {
     "package": "webpack",
     "lint": "eslint --fix ./src/",
-    "test": "jest && eslint ./",
+    "test": "jest && eslint ./src/",
     "test:watch": "jest --watchAll"
   },
   "keywords": [],

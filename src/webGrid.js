@@ -14,6 +14,9 @@ function run() {
   }
 }
 
+const grid = new Grid (5, 5);
+grid.next();
+
 window.addEventListener('load', function() {
     run();
 }, true);
