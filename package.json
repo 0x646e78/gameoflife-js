@@ -4,6 +4,7 @@
   "description": "Conway's Game of Life",
   "main": "src/index.js",
   "scripts": {
+    "package": "webpack",
     "lint": "eslint --fix ./",
     "test": "jest && eslint ./",
     "test:watch": "jest --watchAll"
@@ -15,7 +16,9 @@
     "eslint": "^6.0.1",
     "eslint-plugin-jest": "^22.13.6",
     "jest": "*",
-    "jest-cli": "*"
+    "jest-cli": "*",
+    "webpack": "^4.37.0",
+    "webpack-cli": "^3.3.6"
   },
   "jest": {
     "transform": {
