@@ -24,7 +24,7 @@ function between(min, max, value) {
 }
 
 function decideRandom() {
-  return Math.round(Math.random() * 100) > 70;
+  return Math.random() >= 0.5;
 }
 
 function decideFate(currState, neighbourStates) {
