@@ -1,19 +1,6 @@
 const { Grid } = require('./index');
+const { startX, startY, assertIsWholeNumber } = require('./grid-helpers');
 const term = require('terminal-kit');
-
-function startX(x, border) {
-  return (((term.realTerminal.width - (border * 2) - x) / 2) + border + 1);
-}
-
-function startY(y, border) {
-  return (((term.realTerminal.height - (border * 2) - y) / 2) + border + 1);
-}
-
-function assertIsWholeNumber(n) {
-  if (! Number.isInteger(n)) {
-    throw new Error("Border should be a whole number");
-  }
-}
 
 function assertBorderFits(x, y, border) {
   const b =  border * 2; 
@@ -80,7 +67,7 @@ class TerminalGrid {
 }
 
 function run() {
-  const canvas = new TerminalGrid({x:10, y:10, border:5, center:true, max:true});
+  const canvas = new TerminalGrid({x:10, y:10, border:5, center:true, max:false});
   canvas.run(1000);
 }
 

@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "package": "webpack",
-    "lint": "eslint --fix ./",
+    "lint": "eslint --fix ./src/",
     "test": "jest && eslint ./",
     "test:watch": "jest --watchAll"
   },

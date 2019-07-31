@@ -1,3 +1,5 @@
+const { assertIsBoolean } = require('./grid-helpers');
+
 function makeGrid(x, y){
   const grid = [...Array(x)].map(() =>
     ([...Array(y)].map(() => false))
@@ -14,12 +16,6 @@ function assertIsValidAxisValue(n){
   }
   if (n === Infinity){
     throw new Error("Infinity currently not supported");
-  }
-}
-
-function assertIsBoolean(b){
-  if (typeof(b) !== 'boolean'){
-    throw new Error("State can only be true or false");
   }
 }
 
