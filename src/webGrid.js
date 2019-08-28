@@ -1,44 +1,43 @@
 const { Grid } = require('./index');
 
-function drawcell(ctx, state, x, y) {
-  console.log('y', y);
-  if (state == true) {
-    ctx.fillStyle = "#000000";
-  } else {
-    ctx.fillStyle = "#ffffff";
+class WebGrid {
+  constructor() {
+    this.canvas = document.getElementById('grid');
+    this.context = this.canvas.getContext('2d');
+    if (this.canvas.getContext) {
+      this.grid = new Grid(20, 20);
+    } else {
+      throw new Error('No canvas available');
+    }
   }
-  console.log('state:', state)
-  ctx.fillRect((x * 10), (10 * y), 10, 10);
-}
-
-
-function render(grid, context) {
-  grid.grid.forEach((row, x) => {
-    row.forEach((cell, y) => {
-      drawcell(context, cell, x, y);
+  drawcell(state, x, y) {
+    const size = 10;
+    const ctx = this.context;
+    if (state == true) {
+      ctx.fillStyle = "#000000";
+    } else {
+      ctx.fillStyle = "#ffffff";
+    }
+    console.log('state:', state)
+    ctx.fillRect((x * size), (size * y), size, size);
+  }
+  render() {
+    this.grid.grid.forEach((row, x) => {
+      row.forEach((cell, y) => {
+        this.drawcell(cell, x, y);
+      });
     });
-  });
-}
-
-function run() {
-  const canvas = document.getElementById('grid');
-  console.log('canvas', canvas);
-  if (canvas.getContext) {
-    const context = canvas.getContext('2d');
-    const grid = new Grid(20, 20);
-    grid.randomise();
-    render(grid, context);
-
-    /**
-    [10, 20, 30, 40].forEach((x, n) => {
-      // n starts at 0, increments 1
-      drawcell(context, grid.get(1,1), x, n);
-    });
-    **/
+  }
+  run() {
+    this.grid.randomise();
+    setInterval(() => {
+      this.render();
+      this.grid.next();
+    }, 1000);
   }
 }
-
 
 window.addEventListener('load', function() {
-    run();
+    wg = new WebGrid();
+    wg.run();
 }, true);
