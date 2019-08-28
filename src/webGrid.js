@@ -1,27 +1,43 @@
 const { Grid } = require('./index');
 
-function rect(ctx, n, x) {
-  console.log('n', n);
-  const fillcolor = "#" + ((n + 1) * 20) + "10" + ((n + 1) * 10);
-  console.log('fillcolor', fillcolor);
-  ctx.fillStyle = fillcolor;
-  ctx.fillRect(x, 10, 10, 10);
+function drawcell(ctx, state, x, y) {
+  console.log('y', y);
+  if (state == true) {
+    ctx.fillStyle = "#000000";
+  } else {
+    ctx.fillStyle = "#ffffff";
+  }
+  console.log('state:', state)
+  ctx.fillRect((x * 10), (10 * y), 10, 10);
+}
+
+
+function render(grid, context) {
+  grid.grid.forEach((row, x) => {
+    row.forEach((cell, y) => {
+      drawcell(context, cell, x, y);
+    });
+  });
 }
 
 function run() {
   const canvas = document.getElementById('grid');
   console.log('canvas', canvas);
   if (canvas.getContext) {
-    const ctx = canvas.getContext('2d');
+    const context = canvas.getContext('2d');
+    const grid = new Grid(20, 20);
+    grid.randomise();
+    render(grid, context);
 
+    /**
     [10, 20, 30, 40].forEach((x, n) => {
-      rect(ctx, n, x);
+      // n starts at 0, increments 1
+      drawcell(context, grid.get(1,1), x, n);
     });
+    **/
   }
 }
 
-const grid = new Grid (5, 5);
-grid.next();
 
 window.addEventListener('load', function() {
     run();
