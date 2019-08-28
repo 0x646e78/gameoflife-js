@@ -1,4 +1,4 @@
-# Conway's Game of Life in nodejs
+# Conway's Game of Life in JavaScript
 
 [![CircleCI](https://circleci.com/gh/0x646e78/gameoflife-js/tree/master.svg?style=svg)](https://circleci.com/gh/0x646e78/gameoflife-js/tree/master)
 [![Known Vulnerabilities](https://snyk.io/test/github/0x646e78/gameoflife-js/badge.svg?style=plastic)](https://snyk.io/test/github/0x646e78/gameoflife-js) 
