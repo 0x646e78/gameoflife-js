@@ -4,8 +4,17 @@ class WebGrid {
   constructor() {
     this.canvas = document.getElementById('grid');
     this.context = this.canvas.getContext('2d');
+    this.toggle = document.getElementById('toggleButton');
+    this.toggle.addEventListener('click', () => {
+      if (this.interval) {
+        this.stop();
+      } else {
+        this.start();
+      }
+    });
     if (this.canvas.getContext) {
-      this.grid = new Grid(20, 20);
+      this.grid = new Grid(50,50);
+      this.grid.randomise();
     } else {
       throw new Error('No canvas available');
     }
@@ -18,7 +27,7 @@ class WebGrid {
     } else {
       ctx.fillStyle = "#ffffff";
     }
-    console.log('state:', state)
+    console.log('state:', state);
     ctx.fillRect((x * size), (size * y), size, size);
   }
   render() {
@@ -28,16 +37,19 @@ class WebGrid {
       });
     });
   }
-  run() {
-    this.grid.randomise();
-    setInterval(() => {
+  start() {
+    this.interval = setInterval(() => {
       this.render();
       this.grid.next();
     }, 1000);
   }
+  stop() {
+    clearInterval(this.interval);
+    this.interval = null;
+  }
 }
 
 window.addEventListener('load', function() {
-    wg = new WebGrid();
-    wg.run();
+    const wg = new WebGrid();
+    wg.start();
 }, true);
