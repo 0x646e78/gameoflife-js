@@ -2,7 +2,11 @@ const { Grid } = require('./index');
 
 class WebGrid {
   constructor() {
-    this.canvas = document.getElementById('grid');
+    this.canvas = document.createElement('canvas');
+    this.canvas.setAttribute('width', 500);
+    this.canvas.setAttribute('height', 500);
+    document.getElementById('dyncanvas').appendChild(this.canvas);
+    //this.canvas = document.getElementById('grid');
     this.context = this.canvas.getContext('2d');
     this.toggle = document.getElementById('toggleButton');
     this.toggle.addEventListener('click', () => {
