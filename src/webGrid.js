@@ -1,15 +1,51 @@
-const { Grid } = require('./index');
+const { Grid, newGridFromState } = require('./index');
+
+const initState = [
+  [ false, false, false, false, false, false ],
+  [ false, false, false, true, false, false ],
+  [ false, true, false, true, false, false ],
+  [ false, false, true, true, false, false ],
+  [ false, false, false, false, false, false ],
+  [ false, false, false, false, false, false ],
+];
 
 class WebGrid {
   constructor() {
+    const w = 500;
+    const h = 500;
     this.canvas = document.createElement('canvas');
-    this.canvas.setAttribute('width', 500);
-    this.canvas.setAttribute('height', 500);
+    this.canvas.setAttribute('width', w);
+    this.canvas.setAttribute('height', h);
+    this.canvas.setAttribute('style', 'border: 1px solid #000000');
     document.getElementById('dyncanvas').appendChild(this.canvas);
-    //this.canvas = document.getElementById('grid');
     this.context = this.canvas.getContext('2d');
-    this.toggle = document.getElementById('toggleButton');
-    this.toggle.addEventListener('click', () => {
+    const rect = this.canvas.getBoundingClientRect();
+    let drawing = false;
+    let x = 0;
+    let y = 0
+    this.canvas.addEventListener('mousedown', (e) => {
+      x = Math.floor((e.clientX - rect.left) / 10);
+      y = Math.floor((e.clientY - rect.top) / 10);
+      console.log(x, y);
+      this.grid.toggle(x, y);
+      this.drawcell(this.grid.get(x, y), x, y);
+      drawing = true;
+    });
+    this.canvas.addEventListener('mousemove', (e) => {
+      if (drawing === true) {
+        const mvX = Math.floor((e.clientX - rect.left) / 10);
+        const mvY = Math.floor((e.clientY - rect.top) / 10);
+        if ((x !== mvX) || (y !== mvY)){
+          this.grid.toggle(mvX, mvY);
+          this.drawcell(this.grid.get(mvX, mvY), mvX, mvY);
+        }
+      }
+    });
+    this.canvas.addEventListener('mouseup', (e) => {
+      drawing = false;
+    });
+    this.startstop = document.getElementById('toggleButton');
+    this.startstop.addEventListener('click', () => {
       if (this.interval) {
         this.stop();
       } else {
@@ -17,8 +53,9 @@ class WebGrid {
       }
     });
     if (this.canvas.getContext) {
-      this.grid = new Grid(50,50);
-      this.grid.randomise();
+      this.grid = newGridFromState(initState, (w / 10), (h / 10));
+//      this.grid = new Grid(40,40);
+//      this.grid.randomise();
     } else {
       throw new Error('No canvas available');
     }
@@ -31,7 +68,6 @@ class WebGrid {
     } else {
       ctx.fillStyle = "#ffffff";
     }
-    console.log('state:', state);
     ctx.fillRect((x * size), (size * y), size, size);
   }
   render() {

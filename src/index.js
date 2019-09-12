@@ -47,8 +47,9 @@ function decideFate(currState, neighbourStates) {
   }
 }
 
-function newGridFromState(state){
-  const grid = new Grid(state.length, state[0].length);
+function newGridFromState(state, lenx, leny){
+//  console.log(lenx, leny);
+  const grid = new Grid(lenx, leny);
   state.forEach((row, x) => {
     row.forEach((cellState, y) => {
       grid.set(x, y, cellState);
