@@ -2,18 +2,29 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
   <body>
     <script src="../dist/webGrid.js"></script>
-    <table style="width:90%">
+    <table>
       <th>
         <td>
           <div id="dyncanvas"></div>
         </td>
       </th>
       <th>
-        <td>
-          <button id="toggleButton" type="button">Start/Stop</button>
+        <td id="options">
+          <button id="restartButton" type="button" class="button">Restart</button>
+          <p>
+          <button id="toggleButton" type="button" class="button">Start/Stop</button>
+          <p>
+          <button id="randomButton" type="button" class="button">Randomise</button>
+          <p>
+          <button id="loadState" type="button" class="button">Load State</button>
+          <p>
+          <input id="speed" type="range" min="20" max="1000" value="100" step="10">
+          <label for="speed">Speed</label>
+          </p>
         </td>
       </th>
     </table>

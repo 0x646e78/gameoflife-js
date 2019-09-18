@@ -1,0 +1,28 @@
+@charset "UTF-8"; 
+body {
+	background-color: white;
+}
+table {
+	width: 90%; 
+}
+#options {
+	border: 1px solid black;
+}
+.button {
+	background-color: white;
+	color: black;
+	border: 2px solid #555555;
+	padding: 12px 24px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 12px;
+	margin: 3px 2px;
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
+	cursor: pointer;
+}
+.button:hover {
+	background-color: #555555;
+	color: white;
+}

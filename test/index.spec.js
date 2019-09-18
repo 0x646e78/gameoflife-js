@@ -37,7 +37,7 @@ test("new Grid of 10,10", () => {
 });
 
 test("Get value at x=1, y=2", () => {
-  const grid = newGridFromState(initState);
+  const grid = newGridFromState(initState, 5, 5);
   expect(grid.get(1, 2)).toEqual(true);
 });
 
@@ -60,12 +60,12 @@ test("Toggle value at x=4, y=5", () => {
 });
 
 test("Importing JSON represenation of grid state", () => {
-  const grid = newGridFromState(initState);
+  const grid = newGridFromState(initState, 5, 5);
   expect(grid.dump()).toEqual(JSON.stringify(initState));
 });
 
 test("Get neighbour states", () => {
-  const grid = newGridFromState(initState);
+  const grid = newGridFromState(initState, 5, 5);
   expect(JSON.stringify(grid.neighbourStates(2, 2))).toEqual(JSON.stringify({"live":5,"dead":3}));
   expect(JSON.stringify(grid.neighbourStates(0, 3))).toEqual(JSON.stringify({"live":1,"dead":4}));
   expect(JSON.stringify(grid.neighbourStates(3, 0))).toEqual(JSON.stringify({"live":1,"dead":4}));
@@ -76,7 +76,7 @@ test("Get neighbour states", () => {
 });
 
 test("grid.next should return a grid of next state", () => {
-  const grid = newGridFromState(initState);
+  const grid = newGridFromState(initState, 5, 5);
   grid.next();
   expect(grid.dump()).toEqual(JSON.stringify(nextState));
 });
