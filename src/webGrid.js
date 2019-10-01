@@ -1,13 +1,10 @@
 const { Grid, newGridFromState } = require('./index');
 
-const initState = [
-  [ false, false, false, false, false, false ],
-  [ false, false, false, true, false, false ],
-  [ false, true, false, true, false, false ],
-  [ false, false, true, true, false, false ],
-  [ false, false, false, false, false, false ],
-  [ false, false, false, false, false, false ],
-];
+async function getInitState() {
+  const fetchInitState = await fetch('http://localhost:8080');
+  const initState = await fetchInitState.json();
+	return initState
+}
 
 class WebGrid {
   constructor() {
@@ -39,13 +36,12 @@ class WebGrid {
     });
     this.canvas.addEventListener('mousemove', (e) => {
       if (drawing === true) {
-        const mvX = Math.floor((e.clientX - rect.left) / 10);
-        const mvY = Math.floor((e.clientY - rect.top) / 10);
-        if (!(this.drawn.includes("" + mvX +mvY))) {
-          this.grid.toggle(mvX, mvY);
-          this.drawcell(this.grid.get(mvX, mvY), mvX, mvY);
-          this.drawn.push("" + mvX + mvY);
-          console.log(this.drawn);
+        x = Math.floor((e.clientX - rect.left) / 10);
+        y = Math.floor((e.clientY - rect.top) / 10);
+        if (!(this.drawn.includes("" + x + y))) {
+          this.grid.toggle(x, y);
+          this.drawcell(this.grid.get(x, y), x, y);
+          this.drawn.push("" + x + y);
         }
       }
     });
@@ -59,8 +55,10 @@ class WebGrid {
     this.restart = document.getElementById('restartButton');
     this.restart.addEventListener('click', () => {
       this.stop();
-      this.grid = newGridFromState(initState, (w / 10), (h / 10));
-      this.start();
+      getInitState().then((data) => {
+        this.grid = newGridFromState(data, (w / 10), (h / 10));
+        this.start();
+      });
     });
     this.startstop = document.getElementById('toggleButton');
     this.startstop.addEventListener('click', () => {
@@ -78,10 +76,14 @@ class WebGrid {
     });
 		this.addState = document.getElementById('loadState');
 		this.addState.addEventListener('click', () => {
-      this.loadState(initState);
+      getInitState().then((data) => {
+        this.loadState(data);
+      });
     });
     if (this.canvas.getContext) {
-      this.grid = this.initStateLoad(initState, w, h);
+      getInitState().then((data) => {
+        this.grid = this.initStateLoad(data, w, h);
+      });
     } else {
       throw new Error('No canvas available');
     }
@@ -130,6 +132,6 @@ class WebGrid {
 }
 
 window.addEventListener('load', function() {
-    const wg = new WebGrid();
-    wg.start();
+  const wg = new WebGrid();
+  wg.start();
 }, true);
