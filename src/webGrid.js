@@ -3,7 +3,7 @@ const { Grid, newGridFromState } = require('./index');
 async function getInitState() {
   const fetchInitState = await fetch('http://localhost:8080');
   const initState = await fetchInitState.json();
-	return initState
+	return initState;
 }
 
 class WebGrid {
