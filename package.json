@@ -7,7 +7,9 @@
     "package": "webpack",
     "lint": "eslint --fix ./src/",
     "test": "jest && eslint ./src/",
-    "test:watch": "jest --watchAll"
+    "test:watch": "jest --watchAll",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "keywords": [],
   "license": "MIT",
@@ -27,6 +29,8 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.4.4",
-    "terminal-kit": "^1.28.3"
-  }
+    "terminal-kit": "^1.28.3",
+    "snyk": "^1.316.1"
+  },
+  "snyk": true
 }
