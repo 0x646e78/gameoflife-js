@@ -27,6 +27,6 @@
   },
   "dependencies": {
     "@babel/preset-env": "^7.4.4",
-    "terminal-kit": "^1.28.3"
+    "terminal-kit": "^2.0.5"
   }
 }
